@@ -1,2 +1,3 @@
 # PostForge
-A tool that allows users to easily create posts.
+
+Practical post preparation tool with React.
