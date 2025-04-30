@@ -7,10 +7,14 @@ function CanvasDisplay() {
 
   const [userText, setUserText] = useState("");
   const [bgImageURL, setBgImageURL] = useState("");
+  const [textFontSize, settextFontSize] = useState(30);
+  const canvasSize = 500;
   const canvasWidth = 500;
   const canvasHeight = 500;
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    createPost();
+  }, [userText, textFontSize]);
 
   function createPost() {
     const canvas = canvasRef.current;
@@ -21,13 +25,27 @@ function CanvasDisplay() {
     image.src = bgImageURL;
 
     image.onload = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const imgRatio = image.width / image.height;
+      let drawWidth = canvasSize;
+      let drawHeight = canvasSize;
+
+      if (imgRatio > 1) {
+        drawHeight = canvasSize;
+        drawWidth = canvasSize * imgRatio;
+      } else {
+        drawWidth = canvasSize;
+        drawHeight = canvasSize / imgRatio;
+      }
+      const offsetX = (canvasSize - drawWidth) / 2;
+      const offsetY = (canvasSize - drawHeight) / 2;
+
+      ctx.clearRect(0, 0, canvasSize, canvasSize);
 
       // draw bg image
-      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
-
+      ctx.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
+      console.log("OffsetX: " + offsetX);
       // Text styles
-      ctx.font = "bold 40px system-ui";
+      ctx.font = `bold ${textFontSize}px system-ui`;
       ctx.fillStyle = "#fff";
 
       // Text position - center
@@ -49,11 +67,20 @@ function CanvasDisplay() {
       <div className="text-control">
         <div className="form">
           <div className="form-group">
+            <span className="bg-color">1</span>
+          </div>
+          <div className="form-group">
             <div className="form-input">
               <input
                 type="text"
                 placeholder="Text"
                 onChange={(e) => setUserText(e.target.value)}
+              />
+              <input
+                className="font-size-number"
+                type="number"
+                value={textFontSize}
+                onChange={(e) => settextFontSize(e.target.value)}
               />
             </div>
           </div>
