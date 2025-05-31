@@ -12,9 +12,7 @@ function CanvasDisplay() {
   const canvasWidth = 500;
   const canvasHeight = 500;
 
-  useEffect(() => {
-    createPost();
-  }, [userText, textFontSize]);
+  useEffect(() => {}, [userText, textFontSize]);
 
   function createPost() {
     const canvas = canvasRef.current;
@@ -66,9 +64,6 @@ function CanvasDisplay() {
     <section className="main-section">
       <div className="text-control">
         <div className="form">
-          <div className="form-group">
-            <span className="bg-color">1</span>
-          </div>
           <div className="form-group">
             <div className="form-input">
               <input
