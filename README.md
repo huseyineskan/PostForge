@@ -58,16 +58,6 @@ It allows users to create a visual post by entering **custom text** and a **back
 
 ---
 
-## 📁 Project Structure
-
-📁 src
-├── 📄 CanvasDisplay.jsx
-├── 📄 styles
-│ ├── Canvas.css
-│ └── TextControl.css
-
----
-
 ## 🙌 Future Ideas
 
 - Add a overlay
